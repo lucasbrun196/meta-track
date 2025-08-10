@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta_track/app/modules/auth/presenter/login/controller/login_controller.dart';
+import 'package:meta_track/app/utils/widgets/auth_base_layout.dart';
+import 'package:meta_track/app/utils/widgets/models/auth_bottom_text_button_model.dart';
 
 class LoginView extends StatefulWidget {
   final LoginController controller;
@@ -32,35 +34,25 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: AuthBaseLayout(
+        title: 'META TRACK',
+        cardContent: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+              spacing: 20,
               children: [
-                Text(
-                  'META TRACK',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 0, 0, 0),
-                    fontFamily: 'Playfairdisplay',
-                    fontSize: 48,
-                    shadows: [
-                      Shadow(
-                        color: const Color.fromARGB(150, 0, 0, 0),
-                        offset: Offset(0, 20),
-                        blurRadius: 45,
-                      ),
-                    ],
+                Center(
+                  child: Text(
+                    'Sign in',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SizedBox(
-                  height: 150,
-                ),
+                Divider(),
                 Form(
                   key: _formKey,
                   child: Column(
-                    spacing: 20,
+                    spacing: 30,
                     children: [
                       TextFormField(
                         focusNode: emailFocus,
@@ -77,7 +69,6 @@ class _LoginViewState extends State<LoginView> {
                           }
                           return null;
                         },
-                        cursorWidth: 1,
                         keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                         decoration: InputDecoration(
@@ -105,7 +96,6 @@ class _LoginViewState extends State<LoginView> {
                               }
                               return null;
                             },
-                            cursorWidth: 1,
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: !state.isPasswordVisible,
                             controller: passwordController,
@@ -148,67 +138,43 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: BlocBuilder<LoginController, LoginState>(
-                bloc: widget.controller,
-                buildWhen: (previous, current) =>
-                    previous.status != current.status,
-                builder: (context, state) {
-                  if (state.status == LoginStatus.loading) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 60),
-                      child: LinearProgressIndicator(),
-                    );
-                  } else {
-                    return Column(
-                      spacing: 20,
-                      children: [
-                        TextButton(
-                          style: ButtonStyle(
-                            minimumSize: WidgetStateProperty.all(
-                              Size(360, 60),
-                            ),
-                          ),
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              final email = emailController.text;
-                              final password = passwordController.text;
-                              await widget.controller.signIn(email, password);
-                            }
-                          },
-                          child: Text(
-                            'Sign in',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: const Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ),
-                        ),
-                        Divider(
-                          thickness: 0.5,
-                        ),
-                        InkWell(
-                          onTap: () =>
-                              widget.controller.navigateToCreateAccount(),
-                          overlayColor:
-                              WidgetStatePropertyAll(Colors.transparent),
-                          child: Text(
-                            'Sign up',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: const Color.fromARGB(255, 120, 87, 217),
-                            ),
-                          ),
-                        )
-                      ],
-                    );
-                  }
-                },
-              ),
+            BlocBuilder<LoginController, LoginState>(
+              bloc: widget.controller,
+              buildWhen: (previous, current) =>
+                  previous.status != current.status,
+              builder: (context, state) {
+                if (state.status == LoginStatus.loading) {
+                  return LinearProgressIndicator();
+                } else {
+                  return TextButton(
+                    style: ButtonStyle(
+                      minimumSize: WidgetStateProperty.all(
+                        Size(360, 60),
+                      ),
+                    ),
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        final email = emailController.text;
+                        final password = passwordController.text;
+                        await widget.controller.signIn(email, password);
+                      }
+                    },
+                    child: Text(
+                      'Sign in',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: const Color.fromARGB(255, 0, 0, 0),
+                      ),
+                    ),
+                  );
+                }
+              },
             ),
           ],
+        ),
+        authBottomTextButton: AuthBottomTextButton(
+          title: 'Sign up',
+          onTap: () => widget.controller.navigateToCreateAccount(),
         ),
       ),
     );
