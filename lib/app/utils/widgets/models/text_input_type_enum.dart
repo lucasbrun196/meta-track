@@ -1,0 +1,1 @@
+enum TextInputTypeEnum { email, password }

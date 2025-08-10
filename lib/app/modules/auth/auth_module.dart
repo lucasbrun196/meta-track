@@ -24,18 +24,21 @@ class AuthModule extends Module {
   @override
   void routes(r) {
     r.child(
+      transition: TransitionType.noTransition,
       '/login',
       child: (contex) => LoginView(
         controller: Modular.get(),
       ),
     );
     r.child(
+      transition: TransitionType.noTransition,
       '/forgotpassword',
       child: (context) => ForgotPasswordView(
         controller: Modular.get(),
       ),
     );
     r.child(
+      transition: TransitionType.noTransition,
       '/createaccount',
       child: (context) => CreateAccountView(
         controller: Modular.get(),
