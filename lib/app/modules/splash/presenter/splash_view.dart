@@ -40,8 +40,3 @@ class _SplashViewState extends State<SplashView> {
     );
   }
 }
-
-
-// child: LinearProgressIndicator(
-//                         color: const Color.fromARGB(255, 185, 154, 69),
-//                       ),

@@ -11,6 +11,7 @@ class SplashController {
     try {
       final user = _splashService.getCurrentUser();
       coreCubitController.setCurrentUser(user);
+      redirectToLogin();
     } catch (error) {
       redirectToLogin();
     }
