@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:meta_track/app/core/core_cubit_controller.dart';
 import 'package:meta_track/app/modules/auth/domain/services/auth_service.dart';
 
@@ -27,4 +28,9 @@ class LoginController extends Cubit<LoginState> {
       emit(state.copyWith(status: LoginStatus.failure));
     }
   }
+
+  void navigateToForgotPassword() =>
+      Modular.to.navigate('/auth/forgotpassword');
+
+  void navigateToCreateAccount() => Modular.to.navigate('/auth/createaccount');
 }

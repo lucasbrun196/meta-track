@@ -134,9 +134,8 @@ class _LoginViewState extends State<LoginView> {
                         child: InkWell(
                           overlayColor:
                               WidgetStatePropertyAll(Colors.transparent),
-                          onTap: () {
-                            print('presss');
-                          },
+                          onTap: () =>
+                              widget.controller.navigateToForgotPassword(),
                           child: Text(
                             'Forgot password?',
                             style:
@@ -190,16 +189,19 @@ class _LoginViewState extends State<LoginView> {
                           thickness: 0.5,
                         ),
                         InkWell(
-                            overlayColor:
-                                WidgetStatePropertyAll(Colors.transparent),
-                            child: Text(
-                              'Sign up',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: const Color.fromARGB(255, 120, 87, 217),
-                              ),
-                            ))
+                          onTap: () =>
+                              widget.controller.navigateToCreateAccount(),
+                          overlayColor:
+                              WidgetStatePropertyAll(Colors.transparent),
+                          child: Text(
+                            'Sign up',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: const Color.fromARGB(255, 120, 87, 217),
+                            ),
+                          ),
+                        )
                       ],
                     );
                   }
