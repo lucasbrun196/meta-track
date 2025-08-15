@@ -8,6 +8,7 @@ class AuthCredentialsTextInput extends StatelessWidget {
   final TextEditingController controller;
   final Widget? suffixIcon;
   final bool? obscureText;
+  final String? Function(String?)? customValidation;
 
   const AuthCredentialsTextInput({
     super.key,
@@ -17,6 +18,7 @@ class AuthCredentialsTextInput extends StatelessWidget {
     required this.controller,
     this.suffixIcon,
     this.obscureText,
+    this.customValidation,
   });
 
   String? emailValidator(String? value) {
@@ -36,7 +38,7 @@ class AuthCredentialsTextInput extends StatelessWidget {
 
   void onEditingComplete() {
     currentFocus.unfocus();
-    if (textInputType == TextInputTypeEnum.email && nextFocus != null) {
+    if (nextFocus != null) {
       nextFocus?.requestFocus();
     }
   }
@@ -47,9 +49,10 @@ class AuthCredentialsTextInput extends StatelessWidget {
       focusNode: currentFocus,
       onTapOutside: (event) => currentFocus.unfocus(),
       onEditingComplete: () => onEditingComplete(),
-      validator: textInputType == TextInputTypeEnum.email
-          ? (value) => emailValidator(value)
-          : (value) => passwordValidator(value),
+      validator: customValidation ??
+          (textInputType == TextInputTypeEnum.email
+              ? (value) => emailValidator(value)
+              : (value) => passwordValidator(value)),
       keyboardType: textInputType == TextInputTypeEnum.email
           ? TextInputType.emailAddress
           : TextInputType.visiblePassword,

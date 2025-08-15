@@ -6,11 +6,13 @@ class LoginState {
   final LoginStatus status;
   final bool isPasswordVisible;
   final bool isRemeberMe;
+  final String? errorMessage;
 
   LoginState({
     required this.status,
     required this.isPasswordVisible,
     required this.isRemeberMe,
+    this.errorMessage,
   });
 
   LoginState.initial()
@@ -24,11 +26,13 @@ class LoginState {
     LoginStatus? status,
     bool? isPasswordVisible,
     bool? isRemeberMe,
+    String? errorMessage,
   }) {
     return LoginState(
       status: status ?? this.status,
       isPasswordVisible: isPasswordVisible ?? this.isPasswordVisible,
       isRemeberMe: isRemeberMe ?? this.isRemeberMe,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }

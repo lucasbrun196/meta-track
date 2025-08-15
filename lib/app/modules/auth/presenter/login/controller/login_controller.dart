@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:meta_track/app/core/core_cubit_controller.dart';
 import 'package:meta_track/app/modules/auth/domain/services/auth_service.dart';
+import 'package:meta_track/app/utils/exceptions/firebase_auth_exception_handler.dart';
 
 part 'login_state.dart';
 
@@ -25,6 +26,10 @@ class LoginController extends Cubit<LoginState> {
 
       emit(state.copyWith(status: LoginStatus.success));
     } catch (e) {
+      if (e is FirebaseAuthExceptionHandler) {
+        print('olaa');
+        emit(state.copyWith(errorMessage: e.message));
+      }
       emit(state.copyWith(status: LoginStatus.failure));
     }
   }

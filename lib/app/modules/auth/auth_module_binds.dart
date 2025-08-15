@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:meta_track/app/modules/auth/data/datasource/auth_datasource.dart';
@@ -13,6 +14,7 @@ class AuthModuleBinds extends Module {
     i.addLazySingleton<AuthService>(AuthServiceImp.new);
     i.addLazySingleton<AuthRepository>(AuthRepositoryImp.new);
     i.addLazySingleton<AuthDatasource>(AuthDatasourceImp.new);
+    i.addInstance(FirebaseFirestore.instance);
     i.addInstance(FirebaseAuth.instance);
   }
 }

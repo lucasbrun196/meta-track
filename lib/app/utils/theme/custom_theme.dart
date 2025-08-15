@@ -8,12 +8,14 @@ class CustomTheme {
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
         fontFamily: 'Montserrat',
         progressIndicatorTheme: ProgressIndicatorThemeData(
-          color: const Color.fromARGB(255, 120, 87, 217),
+          color: Color.fromARGB(255, 120, 87, 217),
         ),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
+            textStyle: WidgetStatePropertyAll(
+                TextStyle(fontWeight: FontWeight.w700, fontSize: 18)),
             backgroundColor: WidgetStateProperty.all(
-              const Color.fromARGB(130, 120, 87, 217),
+              Color.fromARGB(255, 120, 87, 217),
             ),
           ),
         ),

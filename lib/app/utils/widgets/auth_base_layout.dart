@@ -21,37 +21,27 @@ class AuthBaseLayout extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                    Color.fromARGB(255, 120, 87, 217),
-                    Color.fromARGB(255, 255, 255, 255),
-                  ])),
+                  color: Color.fromARGB(255, 120, 87, 217),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(75),
+                      bottomRight: Radius.circular(75))),
               height: screenSize.height * 0.65,
               width: screenSize.width,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 120),
-                child: Text(
-                  'META TRACK',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 0, 0, 0),
-                    fontFamily: 'Playfairdisplay',
-                    fontSize: 48,
-                    shadows: [
-                      Shadow(
-                        color: const Color.fromARGB(150, 0, 0, 0),
-                        offset: Offset(0, 20),
-                        blurRadius: 45,
-                      ),
-                    ],
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    height: 200,
+                    width: 200,
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsetsGeometry.only(bottom: 120),
+              padding: EdgeInsetsGeometry.only(bottom: 90),
               child: InkWell(
                 overlayColor: WidgetStatePropertyAll(Colors.transparent),
                 onTap: authBottomTextButton.onTap,
@@ -66,9 +56,9 @@ class AuthBaseLayout extends StatelessWidget {
                   child: Center(
                     child: Text(
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: const Color.fromARGB(255, 120, 87, 217),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                        color: const Color.fromARGB(255, 0, 0, 0),
                       ),
                       authBottomTextButton.title,
                     ),
@@ -79,16 +69,23 @@ class AuthBaseLayout extends StatelessWidget {
           ],
         ),
         Center(
-          child: Card(
-            elevation: 10,
-            child: SizedBox(
-              width: screenSize.width * 0.85,
-              height: screenSize.height * 0.50,
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: cardContent,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SingleChildScrollView(
+                child: Card(
+                  elevation: 10,
+                  child: SizedBox(
+                    width: screenSize.width * 0.85,
+                    height: screenSize.height * 0.50,
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: cardContent,
+                    ),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         )
       ],
