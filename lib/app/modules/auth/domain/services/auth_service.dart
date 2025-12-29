@@ -14,4 +14,6 @@ abstract class AuthService {
   });
 
   Future<void> createUser(UserCredentialsSignUp userCredentials);
+
+  Future<void> resetPassword({required String email});
 }

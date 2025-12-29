@@ -30,4 +30,9 @@ class AuthServiceImp implements AuthService {
   Future<void> createUser(UserCredentialsSignUp userCredentials) async {
     return authRepository.createUser(userCredentials);
   }
+
+  @override
+  Future<void> resetPassword({required String email}) {
+    return authRepository.resetPassword(email: email);
+  }
 }

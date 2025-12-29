@@ -111,6 +111,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                                 ),
                               ),
                               AuthCredentialsTextInput(
+                                label: 'Email',
                                   textInputType: TextInputTypeEnum.email,
                                   currentFocus: emailFocus,
                                   nextFocus: passwordFocus,
@@ -123,6 +124,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                                     current.isPasswordVisible,
                                 builder: (context, state) {
                                   return AuthCredentialsTextInput(
+                                    label: 'Password',
                                     nextFocus: confirmPasswordFocus,
                                     customValidation: (p0) {
                                       if (p0 == null || p0.length < 8) {
@@ -154,7 +156,11 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                                     current.isConfirmPasswordVisible,
                                 builder: (context, state) {
                                   return AuthCredentialsTextInput(
+                                    label: 'Confirm password',
                                     customValidation: (p0) {
+                                      if(p0 == null || p0.isEmpty){
+                                        return 'This field is required';
+                                      }
                                       if (p0 != passwordController.text) {
                                         return 'Incorrect password';
                                       }

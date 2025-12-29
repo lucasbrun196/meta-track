@@ -66,6 +66,7 @@ class _LoginViewState extends State<LoginView> {
                       spacing: 30,
                       children: [
                         AuthCredentialsTextInput(
+                          label: 'Email',
                           textInputType: TextInputTypeEnum.email,
                           currentFocus: emailFocus,
                           nextFocus: passwordFocus,
@@ -78,6 +79,7 @@ class _LoginViewState extends State<LoginView> {
                               current.isPasswordVisible,
                           builder: (context, state) {
                             return AuthCredentialsTextInput(
+                              label: 'Password',
                               textInputType: TextInputTypeEnum.password,
                               currentFocus: passwordFocus,
                               controller: passwordController,

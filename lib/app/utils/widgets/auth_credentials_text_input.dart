@@ -7,6 +7,7 @@ class AuthCredentialsTextInput extends StatelessWidget {
   final FocusNode? nextFocus;
   final TextEditingController controller;
   final Widget? suffixIcon;
+  final String label;
   final bool? obscureText;
   final String? Function(String?)? customValidation;
 
@@ -19,6 +20,7 @@ class AuthCredentialsTextInput extends StatelessWidget {
     this.suffixIcon,
     this.obscureText,
     this.customValidation,
+    required this.label
   });
 
   String? emailValidator(String? value) {
@@ -60,9 +62,7 @@ class AuthCredentialsTextInput extends StatelessWidget {
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
-        label: textInputType == TextInputTypeEnum.email
-            ? Text('Email')
-            : Text('Password'),
+        label: Text(label),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(10),

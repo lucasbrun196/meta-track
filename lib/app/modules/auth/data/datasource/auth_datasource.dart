@@ -8,4 +8,6 @@ abstract class AuthDatasource {
   Future<String> signUp(UserCredentialsSignUp userCredentialsSignUp);
 
   Future<void> createUser(Map<String, dynamic> map);
+
+  Future<void> resetPassword({required String email});
 }

@@ -30,7 +30,7 @@ class AuthDatasourceImp implements AuthDatasource {
       final result = await firebaseAuth.createUserWithEmailAndPassword(
           email: userCredentialsSignUp.email,
           password: userCredentialsSignUp.password);
-
+      result.user!.sendEmailVerification();
       return result.user!.uid;
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthExceptionHandler(e.code);
@@ -45,5 +45,10 @@ class AuthDatasourceImp implements AuthDatasource {
         .collection('users')
         .doc(map['uid'])
         .set({'name': map['name'], 'email': map['email']});
+  }
+
+  @override
+  Future<void> resetPassword({required String email}) async {
+    await firebaseAuth.sendPasswordResetEmail(email: email);
   }
 }

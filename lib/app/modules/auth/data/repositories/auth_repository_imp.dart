@@ -29,4 +29,9 @@ class AuthRepositoryImp implements AuthRepository {
     final map = UserCredentialsSignUpDto.toMap(userCredentialsSignUp);
     return authDatasource.createUser(map);
   }
+
+  @override
+  Future<void> resetPassword({required String email}) {
+    return authDatasource.resetPassword(email: email);
+  }
 }
