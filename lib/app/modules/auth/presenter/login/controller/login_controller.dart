@@ -23,11 +23,10 @@ class LoginController extends Cubit<LoginState> {
     try {
       final user = await _authService.signIn(email: email, password: password);
       _coreCubitController.setCurrentUser(user);
-
+      Modular.to.pushReplacementNamed('/meta-track/');
       emit(state.copyWith(status: LoginStatus.success));
     } catch (e) {
       if (e is FirebaseAuthExceptionHandler) {
-        print('olaa');
         emit(state.copyWith(errorMessage: e.message));
       }
       emit(state.copyWith(status: LoginStatus.failure));

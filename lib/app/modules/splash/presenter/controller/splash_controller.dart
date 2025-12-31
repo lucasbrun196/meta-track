@@ -11,11 +11,13 @@ class SplashController {
     try {
       final user = _splashService.getCurrentUser();
       coreCubitController.setCurrentUser(user);
-      redirectToLogin();
+      redirectToMetaTrack();
     } catch (error) {
       redirectToLogin();
     }
   }
+
+  void redirectToMetaTrack() => Modular.to.pushReplacementNamed('/meta-track/');
 
   void redirectToLogin() => Modular.to.pushReplacementNamed('/auth/login');
 }

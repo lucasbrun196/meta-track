@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:meta_track/app/core/core_cubit_controller.dart';
 import 'package:meta_track/app/modules/auth/auth_module.dart';
+import 'package:meta_track/app/modules/meta_track/meta_track_modules.dart';
 import 'package:meta_track/app/modules/splash/splash_module.dart';
 
 class AppModule extends Module {
@@ -13,5 +14,6 @@ class AppModule extends Module {
   void routes(r) {
     r.module('/', module: SplashModule());
     r.module('/auth', module: AuthModule());
+    r.module('/meta-track', module: MetaTrackModules());
   }
 }
