@@ -50,9 +50,29 @@ class _MetaTrackViewState extends State<MetaTrackView> {
                 if (state.status == MetaTrackStatus.loading) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state.status == MetaTrackStatus.success) {
-                  return Container(
-                    color: Colors.amber,
-                  );
+                  return ListView.separated(
+                      itemBuilder: (context, index) {
+                        return Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                  color:
+                                      const Color.fromARGB(49, 158, 158, 158),
+                                )),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(state.goals[index].title),
+                                Row(
+                                  children: [
+                                    Text(state.goals[index].deadline.toString())
+                                  ],
+                                )
+                              ],
+                            ));
+                      },
+                      separatorBuilder: (context, index) => Divider(),
+                      itemCount: state.goals.length);
                 } else {
                   return Container();
                 }

@@ -12,4 +12,13 @@ class MetaTrackDatasourceImp implements MetaTrackDatasource {
     if (data == null) return {'goals': []};
     return data;
   }
+
+  @override
+  Future<Map<String, dynamic>> getGoal(String reference) async {
+    final ref = reference.split('/');
+    final doc = await firebaseFirestore.collection(ref[0]).doc(ref[1]).get();
+    final data = doc.data();
+    if (data == null) return {};
+    return data;
+  }
 }
